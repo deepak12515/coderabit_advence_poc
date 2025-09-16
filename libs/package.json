@@ -1,0 +1,14 @@
+{
+    "name": "utils",
+    "version": "1.0.0",
+    "private": true,
+    "main": "dist/index.js",
+    "scripts": {
+      "build": "tsc -p .",
+      "lint": "eslint . --ext .ts"
+    },
+    "devDependencies": {
+      "typescript": "^5.1.0"
+    }
+  }
+  

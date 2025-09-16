@@ -1,0 +1,35 @@
+name: PR Checks (CodeRabbit)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  pull-requests: read
+  contents: read
+
+jobs:
+  check-coderabbit-comments:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for CodeRabbit comments
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            if (!pr) {
+              core.info('No PR context');
+              return;
+            }
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const pr_number = pr.number;
+            const comments = await github.rest.pulls.listReviewComments({
+              owner, repo, pull_number: pr_number, per_page: 200
+            });
+            const coderabbitComments = comments.data.filter(c => c.user && (c.user.login.toLowerCase().includes('coderabbit') || c.user.login.toLowerCase().includes('coderabbit')));
+            if (coderabbitComments.length > 0) {
+              core.setFailed(`Found ${coderabbitComments.length} CodeRabbit review comment(s). Resolve them before merging.`);
+            } else {
+              core.info('No CodeRabbit comments found.');
+            }

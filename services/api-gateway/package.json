@@ -1,0 +1,19 @@
+{
+    "name": "api-gateway",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+      "start": "ts-node src/server.ts",
+      "build": "tsc -p .",
+      "test": "echo \"no tests for gateway\""
+    },
+    "dependencies": {
+      "express": "^4.18.2",
+      "axios": "^1.4.0"
+    },
+    "devDependencies": {
+      "typescript": "^5.1.0",
+      "ts-node": "^10.9.1"
+    }
+  }
+  
