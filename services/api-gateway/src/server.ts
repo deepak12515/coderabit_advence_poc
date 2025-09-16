@@ -8,7 +8,7 @@ app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
 app.get('/order/:id', async (req, res) => {
   try {
-    const { data } = await axios.get(`${ORDERS_URL}/order/${req.params.i}`);
+    const { data } = await axios.get(`${ORDERS_URL}/order/${req.params.id}`);
     res.json(data);
   } catch (err) {
     res.status(500).json({ error: 'failed to fetch order' });
