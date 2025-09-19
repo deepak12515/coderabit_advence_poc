@@ -1,0 +1,84 @@
+# .coderabbitrc.yml
+
+review:
+  enabled: true
+  language: en
+  tone: professional
+  include:
+    - services/
+    - libs/
+    - infra/
+    - __tests__/
+    - .github/workflows/
+  exclude:
+    - node_modules/
+    - dist/
+    - coverage/
+    - .next/
+    - .vercel/
+    - .pnpm-store/
+    - .turbo/
+
+rules:
+
+  general:
+    - Avoid using the `any` type
+    - All functions should have explicit return types
+    - Follow ESLint and Prettier formatting
+    - Use `camelCase` for variables and `PascalCase` for classes
+    - Keep functions small and readable (prefer <50 lines)
+    - Avoid deeply nested logic (>3 levels)
+    - Add inline comments for complex logic
+    - No `console.log` or `debugger` in production code
+
+  services/api-gateway/:
+    - Use async/await instead of .then/.catch
+    - Validate all external inputs (query, body, headers)
+    - Separate route logic from business logic
+    - Return proper HTTP status codes
+    - Avoid hardcoded secrets or credentials
+    - Ensure all external calls are wrapped in try/catch
+
+  services/orders-service/:
+    - Use consistent naming like `orderService.ts`, `orderController.ts`
+    - Use try/catch around all async calls
+    - Avoid using `any`
+    - Keep files modular and testable
+    - Ensure each new function has corresponding unit tests
+
+  libs/utils/:
+    - Only include pure utility functions (no side effects)
+    - Avoid project-specific logic
+    - Add edge-case unit tests for all utils
+    - Avoid using third-party libraries unless necessary
+    - Keep functions small and well-documented
+
+  infra/terraform/:
+    - Use variables for all configuration values
+    - Avoid hardcoded values (use `terraform.tfvars`)
+    - Tag all resources with `Environment`, `Project`, `Owner`
+    - Use remote backend for state storage
+    - Separate environments (e.g., dev/stage/prod) using workspaces
+
+  __tests__/:
+    - Write unit tests for all new or updated logic
+    - Maintain at least 80% code coverage
+    - Use descriptive test names
+    - Group related tests using `describe` blocks
+    - Prefer built-in matchers like `toBe`, `toEqual`, `toHaveLength`
+    - Mock external services and APIs
+    - Avoid making real API/database calls
+    - Clean up mocks or test data using `afterEach` or `afterAll`
+
+  .github/workflows/:
+    - Separate jobs for install, build, test, deploy
+    - Use caching with `actions/cache` for dependencies
+    - Avoid hardcoded secrets (use `secrets.GITHUB_TOKEN`)
+    - Add timeouts to long-running jobs
+    - Use matrix builds for multi-version testing (if applicable)
+
+comment_style:
+  summary: true
+  inline: true
+  suggestions: true
+  emojis: false
