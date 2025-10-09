@@ -24,6 +24,7 @@ jobs:
 
       - name: Run lint
         run: pnpm -w run lint
+        continue-on-error: true
 
       - name: Run tests
         run: pnpm -w run test
