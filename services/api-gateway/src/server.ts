@@ -6,7 +6,7 @@ const ORDERS_URL = process.env.ORDERS_URL || 'http://localhost:4000';
 
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
-app.get('/order/:id', async (req, res) => {
+app.get('/order/:id', async (req, res) => 
   try {
     const { data } = await axios.get(`${ORDERS_URL}/order/${req.params.id}`);
     res.json(data);
