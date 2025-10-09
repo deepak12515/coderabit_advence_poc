@@ -77,6 +77,16 @@ rules:
     - Add timeouts to long-running jobs
     - Use matrix builds for multi-version testing (if applicable)
 
+chat:
+  temperature: 0.1
+
+comments:
+  enabled: true
+  line_range: 3
+  suggest_code_changes: true
+  show_issues: true
+  show_fixes: true
+
 comment_style:
   summary: true
   inline: true
